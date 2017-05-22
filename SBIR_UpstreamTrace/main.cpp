@@ -26,7 +26,7 @@ int get_i(int cx);
 int get_j(int cy);
 int get_i_from_idx(int idx);
 int get_j_from_idx(int idx);
-void traceUpstream(fstream &UpTrace, pointlink *pldata, int cx, int cy);
+void traceUpstream(pointlink *pldata, int cx, int cy);
 void split(char **arr, char *str, const char *del);
 
 int main(int argc, char **argv){
@@ -35,7 +35,6 @@ int main(int argc, char **argv){
 	char input[200];
 	//FDary.open("D://python//SBIRDEM//CFDarray.txt",ios::in);
 	FDary.open("D://SBIR//FDarray.txt",ios::in);
-	UpTrace.open("D://SBIR//UParray.txt",ios::out|ios::trunc);
 	int np;
 	FDary>>nx>>ny>>sx>>sy>>res;
 	np=nx*ny;
@@ -117,7 +116,8 @@ void split(char **arr, char *str, const char *del) {
     s = strtok(NULL, del);}
 }
 
-void traceUpstream(fstream& UpTrace, pointlink *pldata, int cx, int cy){
+void traceUpstream(pointlink *pldata, int cx, int cy){
+	UpTrace.open("D://SBIR//UParray.txt",ios::out|ios::trunc);
 	int oi,oj,oidx;
 	vector <int> idxpool;
 	vector <int> idxcchk;
@@ -149,7 +149,9 @@ void traceUpstream(fstream& UpTrace, pointlink *pldata, int cx, int cy){
 		ic = sx+ip*res;
 		jc = sy+(ny-jp)*res;
 		UpTrace<<ic<<" "<<jc<<" "<<ip<<" "<<jp<<" "<<idxcchk[len]<<" "<<idxpool[len]<<endl;
-	}}
+	}
+    UpTrace.close()
+}
 
 
 int get_idx(int i, int j){
