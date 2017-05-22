@@ -1,0 +1,6 @@
+﻿  UpstreamTrace.cpp
+c:\users\chu chia chu\documents\visual studio 2010\projects\upstreamtrace\upstreamtrace\upstreamtrace.cpp(120): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : 請參閱 'strtok' 的宣告
+c:\users\chu chia chu\documents\visual studio 2010\projects\upstreamtrace\upstreamtrace\upstreamtrace.cpp(124): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : 請參閱 'strtok' 的宣告
+  UpstreamTrace.vcxproj -> c:\users\chu chia chu\documents\visual studio 2010\Projects\UpstreamTrace\Debug\UpstreamTrace.exe
