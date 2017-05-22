@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -26,11 +27,12 @@ int get_j(int cy);
 int get_i_from_idx(int idx);
 int get_j_from_idx(int idx);
 void traceUpstream(fstream &UpTrace, pointlink *pldata, int cx, int cy);
+void split(char **arr, char *str, const char *del);
 
 int main(int argc, char **argv){
 	fstream FDary;
 	fstream UpTrace;
-	char position[];
+	char input[200];
 	//FDary.open("D://python//SBIRDEM//CFDarray.txt",ios::in);
 	FDary.open("D://SBIR//FDarray.txt",ios::in);
 	UpTrace.open("D://SBIR//UParray.txt",ios::out|ios::trunc);
@@ -79,26 +81,40 @@ int main(int argc, char **argv){
             cout << "a connection was found" << endl;
             printf("server: got connection from %s\n", inet_ntoa(addr.sin_addr));
 			
-			ZeroMemory(position, )
-            r = recv(sConnect, position, sizeof(position), 0);
-            cout << position << endl;
+            r = recv(sConnect, input, sizeof(input), 0);
+            cout << input << endl;
+			char *pos_arr[2];
+			const char *del = ",";
+			split(pos_arr, input, ",");
+			int cx = atoi(pos_arr[0]);
+			int cy = atoi(pos_arr[1]);
 
-			string _position(position);
- 
-            //¶Ç°e°T®§µ¹ client ºÝ
-            char *sendbuf = "sending data test";
-            send(sConnect, sendbuf, (int)strlen(sendbuf), 0);             
+			cout << "x coordinate:" << cx << endl;
+			cout << "y coordinate:" << cy << endl;
+			
+			traceUpstream(UpTrace, pldata, cx, cy);
+
+			const char *sendback = "Traceback Done";
+            send(sConnect, sendback, sizeof(sendback), 0);             
         }
 	}
 
 	cout<<"test"<<endl;
 
-	int cx = 288040;int cy = 2753360;
+	//int cx = 288040;int cy = 2753360;
 
-	traceUpstream(UpTrace, pldata, cx, cy);
+	// traceUpstream(UpTrace, pldata, cx, cy);
 
 	// cin.get();
 	return(0);
+}
+
+void split(char **arr, char *str, const char *del) {
+  char *s = strtok(str, del);
+  
+  while(s != NULL) {
+    *arr++ = s;
+    s = strtok(NULL, del);}
 }
 
 void traceUpstream(fstream& UpTrace, pointlink *pldata, int cx, int cy){
